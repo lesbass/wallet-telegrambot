@@ -1,10 +1,11 @@
 package com.lesbass.wallet.service
 
-class AuthenticationService {
+import CheckUserRequest
+import WalletApiGateway
 
-    val authorizedUsers = listOf("lesbass")
+class AuthenticationService(private val walletApiGateway: WalletApiGateway) {
 
     fun authorize(userName: String?): Boolean {
-        return authorizedUsers.contains(userName)
+        return !userName.isNullOrEmpty() && walletApiGateway.isAuthorized(CheckUserRequest(userName))
     }
 }

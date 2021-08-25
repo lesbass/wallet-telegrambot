@@ -1,5 +1,6 @@
 package com.lesbass.wallet
 
+import WalletApiGateway
 import com.github.kotlintelegrambot.bot
 import com.github.kotlintelegrambot.dispatch
 import com.github.kotlintelegrambot.dispatcher.text
@@ -10,7 +11,8 @@ import com.lesbass.wallet.service.CommandService
 import com.lesbass.wallet.service.TextService
 import com.natpryce.konfig.*
 
-val authenticationService = AuthenticationService()
+val walletApiGateway = WalletApiGateway()
+val authenticationService = AuthenticationService(walletApiGateway)
 val commandService = CommandService()
 val textService = TextService(commandService)
 

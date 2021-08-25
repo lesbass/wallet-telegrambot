@@ -19,6 +19,13 @@ jobs:
       - name: Stop old instance
         run: docker rm --force wallet-telegrambot
       - name: Deploy
-        run: docker run --name wallet-telegrambot -e API_KEY="${{ secrets.API_KEY }}" --restart unless-stopped -d wallet-telegrambot
+        run: |
+          docker run \
+            --name wallet-telegrambot \
+            -e API_KEY="${{ secrets.API_KEY }}" \
+            -e WALLET_BASE_URL="${{ secrets.WALLET_BASE_URL }}" \
+            -e WALLET_API_KEY="${{ secrets.WALLET_API_KEY }}" \
+            --restart unless-stopped -d \
+            wallet-telegrambot
       - name: Clean up
         run: docker rmi $(docker images -f "dangling=true" -q)
