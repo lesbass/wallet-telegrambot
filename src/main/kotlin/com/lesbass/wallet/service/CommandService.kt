@@ -23,7 +23,7 @@ class CommandService {
 
     fun getComandi(): String {
         return listOf("Ecco un elenco dei comandi disponibili:")
-            .union(commands.map { """ \${it.key} """ })
+            .union(commands.map { """/${it.key} """ })
             .joinToString("\n")
     }
 }
