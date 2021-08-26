@@ -13,7 +13,7 @@ import com.natpryce.konfig.*
 
 val walletApiGateway = WalletApiGateway()
 val authenticationService = AuthenticationService(walletApiGateway)
-val commandService = CommandService()
+val commandService = CommandService(walletApiGateway)
 val textService = TextService(commandService)
 
 fun processMessage(message: Message): String =
@@ -22,9 +22,9 @@ fun processMessage(message: Message): String =
     } else {
         (message.text ?: "").let {
             if (it.startsWith("/")) {
-                commandService.processCommand(it)
+                commandService.processCommand(message)
             } else {
-                textService.processText(it)
+                textService.processText(message)
             }
         }
     }
