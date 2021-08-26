@@ -36,11 +36,11 @@ class WalletApiGateway {
         return result is com.github.kittinunf.result.Result.Success
     }
 
-    fun getCategories(checkUserRequest: CategoriesRequest): List<WalletCategory> {
+    fun getCategories(categoriesRequest: CategoriesRequest): List<WalletCategory> {
         val (_, _, result) = buildApiUrl("/category")
             .httpPost()
             .appendHeader("Authorization", getBearer())
-            .objectBody(checkUserRequest)
+            .objectBody(categoriesRequest)
             .responseObject<List<WalletCategory>>(mapper = objectMapper)
 
         return result.fold(
