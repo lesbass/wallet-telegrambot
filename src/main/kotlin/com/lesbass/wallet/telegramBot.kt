@@ -69,7 +69,7 @@ fun main() {
                         categories
                             .filter { !it.top }
                             .map { buildCategoryButton(it) }
-                            .chunked(1)
+                            .chunked(3)
                     )
                     bot.sendMessage(
                         chatId = ChatId.fromId(message.chat.id),
